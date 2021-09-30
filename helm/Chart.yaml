@@ -1,0 +1,8 @@
+apiVersion: v1
+name: techtrends
+keywords:
+- techtrends
+version: 1.0.0
+maintainers:
+- name: Juan Jesus Arjona
+  email: jjarjona82@gmail.com
