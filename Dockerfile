@@ -2,7 +2,7 @@ FROM python:2.7
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY ./techtrends ./
 RUN pip install -r requirements.txt
 
 EXPOSE 3111
