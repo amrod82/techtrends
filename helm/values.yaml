@@ -1,6 +1,9 @@
 namespace:
   name: sandbox
 
+metadata:
+  name: techtrends
+
 service:
   port: 4111
   targetPort: 3111
@@ -27,8 +30,8 @@ containerPort:
 
 livenessProbe:
   path: /healthz
-  port: { .Values.containerPort.port }
+  port: 3111
 
 readinessProbe:
   path: /healthz
-  port: { .Values.containerPort.port }
+  port: 3111

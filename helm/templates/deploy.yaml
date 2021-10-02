@@ -1,39 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
   labels:
-    app: { .Values.image.repository }
-  name: { .Values.image.repository }
-  namespace: { .Values.namespace.name }
+    app: {{ .Values.image.repository }}
+  name: {{ .Values.metadata.name }}
+  namespace: {{ .Values.namespace.name }}
 spec:
-  replicas: { .Values.replicaCount }
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: { .Values.image.repository }
+      app: {{ .Values.image.repository }}
   template:
     metadata:
       labels:
-        app: { .Values.image.repository }
+        app: {{ .Values.image.repository }}
     spec:
       containers:
-      - image: lorddrakov/{ .Values.image.repository }:{ .Values.image.tag }
-        name: { .Values.image.repository }
+      - image: lorddrakov/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+        name: {{ .Values.image.repository }}
         ports:
-        - containerPort: { .Values.containerPort.port }
-          protocol: { .Values.service.protocol }
+        - containerPort: {{ .Values.containerPort.port }}
+          protocol: {{ .Values.service.protocol }}
         livenessProbe:
            httpGet:
-             path: { .Values.livenessProbe.path }
-             port: { .Values.livenessProbe.port }
+             path: {{ .Values.livenessProbe.path }}
+             port: {{ .Values.livenessProbe.port }}
         readinessProbe:
            httpGet:
-             path: { .Values.readinessProbe.path }
-             port: { .Values.readinessProbe.port }
+             path: {{ .Values.readinessProbe.path }}
+             port: {{ .Values.readinessProbe.port }}
         resources:
           requests:
-            cpu: { .Values.resources.requests.cpu }
-            memory: { .Values.resources.requests.memory } 
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }} 
           limits:
-            cpu: { .Values.resources.limits.cpu }
-            memory: { .Values.resources.limits.memory }
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
