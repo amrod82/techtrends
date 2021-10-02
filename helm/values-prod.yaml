@@ -26,12 +26,12 @@ resources:
     memory: "256Mi"
 
 containerPort:
-  port: 7111
+  port: 3111
 
 livenessProbe:
   path: /healthz
-  port: 7111
+  port: 3111
 
 readinessProbe:
   path: /healthz
-  port: 7111
+  port: 3111
