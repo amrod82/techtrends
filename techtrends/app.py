@@ -1,5 +1,5 @@
 import sqlite3
-import logging
+import logging, sys
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
@@ -148,16 +148,28 @@ if __name__ == "__main__":
     ch = logging.StreamHandler()
     ch.setLevel(logging.DEBUG)
 
+    # add the stdout handler
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.setLevel(logging.DEBUG)
+
+    # add the error handler
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    stderr_handler.setLevel(logging.DEBUG)
+
     # create the message and date formatter
     formatter = logging.Formatter('%(levelname)s: %(name)s: %(asctime)s, %(message)s', "%d-%m-%Y %H:%M:%S")
 
     # add the formatter to the handlers
     fh.setFormatter(formatter)
     ch.setFormatter(formatter)
+    stdout_handler.setFormatter(formatter)
+    stderr_handler.setFormatter(formatter)
 
     # add the handlers to the logger
     log.addHandler(fh)
     log.addHandler(ch)
+    log.addHandler(stdout_handler)
+    log.addHandler(stderr_handler)
 
     # app.run(debug=True)
     app.run(host='0.0.0.0', port='3111')
